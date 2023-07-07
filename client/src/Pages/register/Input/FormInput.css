@@ -1,0 +1,26 @@
+.companyInput input{
+    width: 60%;
+    height: 30px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    font-size: 18px;
+    padding-left: 20px;
+    margin: 10px;
+    margin-left: 19%;
+    
+}
+
+.error{
+    font-size: 12px;
+    padding: 3px;
+    color: red;
+    display: none;
+    margin-left: 21%;
+}
+
+
+input:invalid[focused = "true"] ~ span{
+    display: block;
+    
+}

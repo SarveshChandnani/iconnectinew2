@@ -1,0 +1,13 @@
+.main{
+  border: 5px;
+  text-align: center;
+  /* margin-top:30px ; */
+  padding-top: 35px;
+  background-color: white;
+}
+.flex_row{
+  height: 50px;
+  justify-content: center;
+  display: flex;
+  /* border: 2px; */
+}

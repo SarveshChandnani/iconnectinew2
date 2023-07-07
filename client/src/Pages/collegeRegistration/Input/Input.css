@@ -1,0 +1,42 @@
+.collegeInput input{
+    /* width: 95%;
+    height: 30px;
+    margin-bottom: 5px; 
+    border-radius: 0;
+    border: 1px solid gray;
+    font-size: 18px;
+    margin: 10px;
+    margin-left: 19%;
+    
+    padding-left: 20px; */
+    width: 250px;
+    height: 47px;
+  display: block;
+  border: 1px solid #e6e6e6;
+  background: none;
+  border-radius: 5px;
+  padding: 0 19px;
+    
+}
+
+.collegeInput input:focus{
+    border: 1px solid #484747;
+}
+.collegeInput label{
+    font-size: 18px;
+    margin-left: 19%;
+    
+}
+.error{
+    font-size: 12px;
+    padding: 3px;
+    color: red;
+    display: none;
+    margin-left: 0%;
+}
+
+
+input:invalid[focused = "true"] ~ span{
+    display: block;
+    
+}

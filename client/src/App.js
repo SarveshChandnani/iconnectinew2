@@ -1,7 +1,4 @@
 
-
-
-
 import React from 'react';
 import Home from './Pages/home/home';
 import  {Routes ,Route} from 'react-router-dom';
@@ -13,6 +10,7 @@ import AdminPage from './Pages/Admin/AdminPage';
 import CollegeRegister from './Pages/collegeRegistration/collegeRegister';
 import Posting from './Pages/internshipPosting/posting';
 import Otp from './Pages/Otp/otp';
+import collegeMainScreen from './Pages/CollegeMainScreen/CollegeMainScreen';
 import CollegeMainScreen from './Pages/CollegeMainScreen/CollegeMainScreen';
 
 
@@ -22,6 +20,7 @@ import CollegeMainScreen from './Pages/CollegeMainScreen/CollegeMainScreen';
 function App() {
 	return (
 		<div>
+	
 		
 		<Routes>
 

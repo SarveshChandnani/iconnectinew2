@@ -147,8 +147,8 @@ router.post("/signin", async (req, res) => {
     }
     const userExist = await User.findOne({ companyspocemail: email });
     const collegeUser = await College.findOne({ collegespocemail: email });
-    
-console.log(collegeUser);
+
+    console.log(collegeUser);
     if (userExist && !collegeUser) {
       const isMatch = await bcrypt.compare(password, userExist.password);
 
@@ -253,7 +253,7 @@ console.log(collegeUser);
           console.log("updating");
           const updateData = await UserOtp.findByIdAndUpdate(
             { _id: emailExist._id },
-            { emailotp  : OTP },
+            { emailotp: OTP },
             { new: true }
           );
           await updateData.save();
@@ -277,7 +277,7 @@ console.log(collegeUser);
           const saveOtpData = new UserOtp({
             email,
             emailotp: OTP,
-            phoneotp: "none"
+            phoneotp: "none",
           });
           await saveOtpData.save();
           const mailOptions = {
@@ -572,7 +572,7 @@ router.post("/posting", async (req, res) => {
       userID,
       uniqueID,
       postdate,
-      postingemail
+      postingemail,
     } = req.body;
 
     if (
@@ -589,9 +589,7 @@ router.post("/posting", async (req, res) => {
       !userID
     ) {
       return res.status(422).json({ error: "Please Fill the fields" });
-    }
-    
-    else {
+    } else {
       const user = new Posting({
         areaofwork,
         startdate,
@@ -649,7 +647,7 @@ router.post("/allpostings", async (req, res) => {
 
 router.post("/otpverify", async (req, res) => {
   const { email, otp } = req.body;
-  
+
   const user = await User.findOne({ companyspocemail: email });
   // const collegeUser = await College.findOne({collegesopcemail : email});
   const collegeUser = await College.findOne({ collegespocemail: email });
@@ -657,25 +655,23 @@ router.post("/otpverify", async (req, res) => {
   console.log(userExist);
   console.log(user);
   console.log(collegeUser);
-  if(user && !collegeUser){
-   
-  if (userExist[0].emailotp === otp) {
-    token = await user.generateAuthToken();
-    res.cookie("jwtoken", token, {
-      expires: new Date(Date.now() + 14400000),
-      httpOnly: true,
-    });
-    await User.updateOne(
-      { companyspocemail: email },
-      { $set: { loggedin: "YES", count: 0 } }
-    );
+  if (user && !collegeUser) {
+    if (userExist[0].emailotp === otp) {
+      token = await user.generateAuthToken();
+      res.cookie("jwtoken", token, {
+        expires: new Date(Date.now() + 14400000),
+        httpOnly: true,
+      });
+      await User.updateOne(
+        { companyspocemail: email },
+        { $set: { loggedin: "YES", count: 0 } }
+      );
 
-    return res.status(200).json({ message: "Company" });
-  } else {
-    return res.status(422).json({ error: "Invalid OTP" });
-  }}
-  else if (!user && collegeUser ){
-
+      return res.status(200).json({ message: "Company" });
+    } else {
+      return res.status(422).json({ error: "Invalid OTP" });
+    }
+  } else if (!user && collegeUser) {
     console.log("inside college");
     if (userExist[0].emailotp === otp) {
       token = await collegeUser.generateAuthToken();
@@ -687,7 +683,7 @@ router.post("/otpverify", async (req, res) => {
         { collegespocemail: email },
         { $set: { loggedin: "YES", count: 0 } }
       );
-  
+
       return res.status(200).json({ message: "College" });
     } else {
       return res.status(422).json({ error: "Invalid OTP" });
@@ -700,4 +696,29 @@ router.get("/logout", (req, res) => {
   res.send("Cookie deleted");
 });
 
+router.post("/updatecompany", async(req, res) => {
+  console.log("req.body");
+  const {
+    companyspocemail,
+    password,
+    confirmpassword,
+    companyname,
+    companyspocname,
+    companyspocphone,
+    orignalemail,
+  } = req.body;
+
+  const user = await User.findOne({companyspocemail : companyspocemail});
+  if (user){
+    res.status(422).json({error : "Email already used"});
+  }
+  if(!password ){
+    
+    await User.updateMany({companyspocemail: orignalemail} , {$set:{companyspocemail:companyspocemail , companyname : companyname ,companyspocname:companyspocname, companyspocphone : companyspocphone }})
+   res.status(200).json({message : "successful!!"});
+
+  }else{
+
+  }
+});
 module.exports = router;

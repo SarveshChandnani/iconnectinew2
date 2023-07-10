@@ -210,21 +210,17 @@ const MainContent = (props) => {
   return (
     <div>
       <div className="mainbody">
+        <h1>Internships posted by you!</h1>
         <table className="maintable">
           <thead>
             <tr>
               <th>Posting ID</th>
-              <th>Posted On</th>
               <th>Area Of Work</th>
               <th>Start Date</th>
               <th>End Date</th>
-              <th>Stipend</th>
-              <th>Hours Per Week</th>
-              <th>Location Of Work</th>
-              <th>Type of Engagement</th>
               <th>Vacancies Available</th>
               <th>Skills Required</th>
-              <th>Job Description</th>
+             
             </tr>
           </thead>
           <tbody>
@@ -232,17 +228,12 @@ const MainContent = (props) => {
               return (
                 <tr id={user._id}>
                   <td onClick={() => toggleModal(user._id)}>{user.uniqueID}</td>
-                  <td>{user.postdate}</td>
                   <td>{user.areaofwork}</td>
                   <td>{user.startdate}</td>
-                  <td>{user.enddate}</td>
-                  <td>{user.stipend}</td>
-                  <td>{user.hoursweek}</td>
-                  <td>{user.locationofwork}</td>
-                  <td>{user.typeofengagement}</td>
+                  <td>{user.enddate}</td>  
                   <td>{user.vacancy}</td>
                   <td>{user.skills}</td>
-                  <td>{user.jobdescription}</td>
+                  
                 </tr>
               );
             })}

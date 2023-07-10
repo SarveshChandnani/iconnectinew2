@@ -4,7 +4,7 @@
 } */
 
 
-.card {
+/* .card {
 
     width: 60%;
     height: 60%;
@@ -12,7 +12,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     
-  }
+  } */
   
   /* .table table {
     width: 100%;
@@ -27,37 +27,39 @@
     border: 1px solid #ccc;
   }
    */
-   .card table {
+   /* .card table {
     width: 100%;
     height: 100%;
     border-collapse: collapse;
     border: 1px solid #ccc;
-  }
+  } */
   
-  .card table td {
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #ccc;
-  }
   
-  .card-title{
+  
+  /* .card-title{
     font-size: 40px;
      padding: 10px;
      align-items: center;
      margin-left: 40%;
- }
+ } */
  
  .mainbody{
      
      margin: 10px 70px 70px;
      margin-top: 100px;
-     box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+    
      margin-right: 500px;
  }
  
+ .mainbody h1{
+    font-family: 'Times New Roman', Times, serif;
+    color: rgb(1, 59, 1);
+    margin: 20px;
+    margin-left: 0;
+ }
  .maintable{
      border-radius: 5px;
-     font-size: 12px;
+     font-size: 15px;
      font-weight: normal;
      border: none;
      border-collapse: collapse;
@@ -65,6 +67,7 @@
      max-width: 100%;
      white-space: nowrap;
      background-color: white;
+     box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
      
     
  }
@@ -76,18 +79,19 @@
  
  .maintable td {
      border-right: 1px solid #f8f8f8;
-     font-size: 12px;
+     font-size: 15px;
  }
  
  .maintable thead th {
      color: #ffffff;
-     background: #4FC3A1;
+     background: #41b08f;
+     font-size: 15px;
  }
  
  
  .maintable thead th:nth-child(odd) {
      color: #ffffff;
-     background: #324960;
+     background: rgb(34, 34, 34);
  }
  
  .maintable tr:nth-child(even) {

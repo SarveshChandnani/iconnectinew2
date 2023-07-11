@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Home from './Pages/home/home';
 import  {Routes ,Route} from 'react-router-dom';
@@ -11,6 +12,7 @@ import Posting from './Pages/internshipPosting/posting';
 import Otp from './Pages/Otp/otp';
 import CollegeMainScreen from './Pages/CollegeMainScreen/CollegeMainScreen';
 import UpdateProfile from './Pages/updateProfile/UpdateProfile';
+
 
 
 

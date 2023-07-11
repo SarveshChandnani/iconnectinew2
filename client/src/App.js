@@ -1,7 +1,3 @@
-
-
-
-
 import React from 'react';
 import Home from './Pages/home/home';
 import  {Routes ,Route} from 'react-router-dom';

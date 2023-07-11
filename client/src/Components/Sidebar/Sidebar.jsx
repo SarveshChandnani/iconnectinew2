@@ -49,8 +49,8 @@ const Sidebar = ({ children, deactivate,email }) => {
       deactivate: { deactivate },
     },
     {
-      path: "/productList",
-      name: "Reset Password",
+      path: `/updateProfile/${email}`,
+      name: "Update Profile",
       icon: <FaLaptopCode />,
       deactivate: { deactivate },
     },

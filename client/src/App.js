@@ -12,6 +12,7 @@ import Posting from './Pages/internshipPosting/posting';
 import Otp from './Pages/Otp/otp';
 import collegeMainScreen from './Pages/CollegeMainScreen/CollegeMainScreen';
 import CollegeMainScreen from './Pages/CollegeMainScreen/CollegeMainScreen';
+import UpdateProfile from './Pages/updateProfile/UpdateProfile';
 
 
 
@@ -34,7 +35,7 @@ function App() {
 			<Route path='/InternshipPosting/:email' element={<Posting/>}> </Route>
 			<Route path='/otp/:email' element={<Otp/>}> </Route>
 			<Route path='/collegeMainScreen/:email' element={<CollegeMainScreen/>}></Route>
-
+            <Route path='/updateProfile/:email' element={<UpdateProfile/>}></Route>
 		</Routes >
 		
 		</div>

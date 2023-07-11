@@ -142,13 +142,14 @@ router.post("/signin", async (req, res) => {
   try {
     let token;
     const { email, password } = req.body;
+    console.log(req.body);
 
     if (!email || !password) {
       return res.status(422).json({ error: "Please Fill the fields" });
     }
     const userExist = await User.findOne({ companyspocemail: email });
     const collegeUser = await College.findOne({ collegespocemail: email });
-
+    console.log("hell");
     console.log(userExist);
     if (userExist && !collegeUser) {
       const isMatch = await bcrypt.compare(password, userExist.password);
@@ -319,15 +320,48 @@ router.get("/allUsers", async (req, res) => {
 });
 
 router.post("/updateuser", async (req, res) => {
-  const { uid, deactivate } = req.body;
+  const { uid, deactivate ,companyspocemail} = req.body;
   try {
     if (deactivate === "NO") {
       await User.updateOne({ _id: uid }, { $set: { deactivate: "YES" } });
+      const mailOptions = {
+        from: process.env.EMAIL,
+        to: companyspocemail,
+        subject: "Deactivation Mail",
+        text: "Your Account has been Deactivated!!",
+      };
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(error);
+          
+        } else {
+          console.log("email sent");
+          
+        }
+      });
+
+      
+  
     } else {
       await User.updateOne(
         { _id: uid },
         { $set: { deactivate: "NO", count: 1 } }
       );
+      const mailOptions = {
+        from: process.env.EMAIL,
+        to: companyspocemail,
+        subject: "Activation Mail",
+        text: "Your Account has been Activated!!",
+      };
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(error);
+          
+        } else {
+          console.log("email sent");
+          
+        }
+      });
     }
     res.status(200).json({ message: "updated" });
   } catch (error) {

@@ -83,6 +83,7 @@ const AdminPage = () => {
         body: JSON.stringify({
           uid: id,
           deactivate,
+          companyspocemail
         }),
       });
 

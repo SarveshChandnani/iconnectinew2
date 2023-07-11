@@ -15,6 +15,7 @@ const UserOtp = require("../DB/userOtp");
 const nodemailer = require("nodemailer");
 const twilio = require("twilio");
 
+
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -148,7 +149,7 @@ router.post("/signin", async (req, res) => {
     const userExist = await User.findOne({ companyspocemail: email });
     const collegeUser = await College.findOne({ collegespocemail: email });
 
-    console.log(collegeUser);
+    console.log(userExist);
     if (userExist && !collegeUser) {
       const isMatch = await bcrypt.compare(password, userExist.password);
 
@@ -696,29 +697,58 @@ router.get("/logout", (req, res) => {
   res.send("Cookie deleted");
 });
 
-router.post("/updatecompany", async(req, res) => {
-  console.log("req.body");
-  const {
-    companyspocemail,
-    password,
-    confirmpassword,
-    companyname,
-    companyspocname,
-    companyspocphone,
-    orignalemail,
-  } = req.body;
+router.post("/updatecompany", async (req, res) => {
+  try {
+    let {
+      
+      password,
+      confirmpassword,
+      companyname,
+      companyspocname,
+      companyspocphone,
+      orignalemail,
+    } = req.body;
 
-  const user = await User.findOne({companyspocemail : companyspocemail});
-  if (user){
-    res.status(422).json({error : "Email already used"});
-  }
-  if(!password ){
-    
-    await User.updateMany({companyspocemail: orignalemail} , {$set:{companyspocemail:companyspocemail , companyname : companyname ,companyspocname:companyspocname, companyspocphone : companyspocphone }})
-   res.status(200).json({message : "successful!!"});
+    // const user = await User.findOne({ companyspocemail: companyspocemail });
 
-  }else{
-
+    // if (user) {
+    //   res.status(422).json({ error: "Email already used" });
+    // }
+    if (!password) {
+      await User.updateMany(
+        { companyspocemail: orignalemail },
+        {
+          $set: {
+            companyname: companyname,
+            companyspocname: companyspocname,
+            companyspocphone: companyspocphone,
+          },
+        }
+      );
+      res.status(200).json({ message: "successful!!" });
+    } else {
+      password = await bcrypt.hash(password , 12);
+      console.log(password);
+      
+      confirmpassword = await bcrypt.hash(confirmpassword , 12);
+      console.log(confirmpassword);
+      await User.updateMany(
+        { companyspocemail: orignalemail },
+        {
+          $set: {
+            
+            password : password,
+            confirmPassword : confirmpassword,
+            companyname: companyname,
+            companyspocname: companyspocname,
+            companyspocphone: companyspocphone,
+          },
+        }
+      );
+      res.status(200).json({ message: "successful!!" });
+    }
+  } catch (error) {
+    console.log(error);
   }
 });
 module.exports = router;

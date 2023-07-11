@@ -8,12 +8,13 @@ const UpdateProfile = () => {
   const [userData, setUserData] = useState({});
   const { email } = useParams();
   const navigate = useNavigate();
+  const [focused , setFocus] = useState(false);
 
   useEffect(() => {
     callMainPage(setUserData, setDeactivate, navigate, email);
   }, []);
   const [values, setValues] = useState({
-    companyspocemail: "",
+    // companyspocemail: "",
     password: "",
     confirmpassword: "",
     companyname: "",
@@ -35,6 +36,11 @@ const UpdateProfile = () => {
     e.preventDefault();
     console.log("helllo");
     console.log(values);
+    console.log(focused);
+    // if(focused=== true){
+    //   window.alert("Invalid Credentials");
+    //   navigate(`/updateProfile/${email}`)
+    // }else{
 
     let {
       companyspocemail,
@@ -76,10 +82,18 @@ const UpdateProfile = () => {
     })
 
     const data = await res.json();
-    console.log(data);
-
-
+    console.log(res.status);
+    console.log(data.message);
+    if(data.message === "successful!!"){
+      console.log("inside success");
+      navigate(`/MainScreen/${orignalemail}`)
+    }
+  // }
   };
+
+  const handleFocus = (e)=>{
+    setFocus(true);
+  }
   
 
   return (
@@ -92,7 +106,7 @@ const UpdateProfile = () => {
 
       <div className="wrapper">
         <div className="insidewrapper">
-          <div className="fields">
+          {/* <div className="fields">
             <label>Company SPOC Email</label>
             <input
               type="text"
@@ -102,27 +116,35 @@ const UpdateProfile = () => {
               //   value={values.skills}
               //   onChange={onChange}
             />
-          </div>
+          </div> */}
           <div className="fields">
             <label>New Password</label>
             <input
-              type="text"
+              type="password"
               name="password"
               onChange={onChange}
+              pattern="^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
+              onBlur={handleFocus}
+              focused = {focused.toString()}
 
               //   value={values.skills}
               //   onChange={onChange}
             />
+            <span className="error">Password should be 8-20 characters and include atleast 1 letter, 1 number and 1 special character!</span>
           </div>
           <div className="fields">
             <label>Retype New Password</label>
             <input
-              type="text"
+              type="password"
               name="confirmpassword"
               onChange={onChange}
+              pattern = {values.password}
+              onBlur={handleFocus}
+              focused = {focused.toString()}
               //   value={values.skills}
               //   onChange={onChange}
             />
+            <span className="error">Passwords don't match!</span>
           </div>
           <div className="fields">
             <label>Company Name</label>
@@ -142,9 +164,13 @@ const UpdateProfile = () => {
               name="companyspocname"
               placeholder={userData.companyspocname}
               onChange={onChange}
+              pattern="^[A-Za-z0-9]{3-}$"
+              onBlur={handleFocus}
+              focused = {focused.toString()}
               //   value={values.skills}
               //   onChange={onChange}
             />
+            <span className="error">Username should be of at least 3 letters and shouldn't include any special character!</span>
           </div>
           <div className="fields">
             <label>Company SPOC Phone</label>
@@ -153,9 +179,13 @@ const UpdateProfile = () => {
               name="companyspocphone"
               placeholder={userData.companyspocphone}
               onChange={onChange}
+              pattern="^[0-9]{10}$"
+              onBlur={handleFocus}
+              focused = {focused.toString()}
               //   value={values.skills}
               //   onChange={onChange}
             />
+            <span className="error">Phone number should be of 10 digits!</span>
           </div>
         </div>
         <div className="bottom">

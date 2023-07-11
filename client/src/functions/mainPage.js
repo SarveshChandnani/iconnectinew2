@@ -34,7 +34,8 @@ export const callMainPage = async(setUserData,setDeactivate , navigate , email)=
           } catch (error) {
             console.error('Error occurred while deleting cookie:', error);
           }
-      }else if (data.deactivate === 'YES'){
+      }
+      else if (data.deactivate === 'YES'){
         navigate(`/MainScreen/${data.companyspocemail}`);
       }
     }else{

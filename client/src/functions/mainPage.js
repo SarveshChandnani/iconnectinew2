@@ -19,7 +19,7 @@ export const callMainPage = async(setUserData,setDeactivate , navigate , email)=
       setDeactivate(data.deactivate);
 
        if(data.companyspocemail === email){
-      if(data.deactivate === 'NO'&& data.loggedin === 'YES' && data.count === 1){
+      if( data.loggedin === 'YES' && data.count === 1){
         try {
             const response = await fetch('/logout', {
               method: 'GET',

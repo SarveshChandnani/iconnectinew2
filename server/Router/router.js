@@ -323,7 +323,7 @@ router.post("/updateuser", async (req, res) => {
   const { uid, deactivate ,companyspocemail} = req.body;
   try {
     if (deactivate === "NO") {
-      await User.updateOne({ _id: uid }, { $set: { deactivate: "YES" } });
+      await User.updateOne({ _id: uid }, { $set: { deactivate: "YES", count: 1 } });
       const mailOptions = {
         from: process.env.EMAIL,
         to: companyspocemail,
